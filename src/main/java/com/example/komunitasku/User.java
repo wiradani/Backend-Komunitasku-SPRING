@@ -10,29 +10,13 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_user")
     private  Long id;
-
-
     private  String name;
-
-
     private String username;
-
-
     private  String password;
-
-
     private  String email;
-
-
     private  String title;
-
-
     private  Long xp;
-
-
     private  Long points;
-
-
     private  Boolean role;
 
     public User() {
