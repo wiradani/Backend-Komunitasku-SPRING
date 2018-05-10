@@ -38,6 +38,7 @@ public class UserController {
         userold.setEmail(userNew.getEmail());
         userold.setName(userNew.getName());
         userold.setPassword(userNew.getPassword());
+        userold.setUsername(userNew.getUsername());
         return userRepository.save(userold);
 
     }
