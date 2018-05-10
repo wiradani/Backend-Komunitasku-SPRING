@@ -40,7 +40,6 @@ public class UserController {
         userold.setPassword(userNew.getPassword());
         userold.setUsername(userNew.getUsername());
         return userRepository.save(userold);
-
     }
 
     @DeleteMapping("/User/{id}")
