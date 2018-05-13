@@ -9,10 +9,6 @@ import java.util.Date;
 @Table(name = "Gath")
 public class Gath extends Event {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_gath")
-    private Long id_gath;
     private String materi;
     private String lokasi;
     private Long pengajar;
@@ -20,25 +16,11 @@ public class Gath extends Event {
     public Gath() {
     }
 
-    public Gath(String materi, String lokasi, Long pengajar) {
-        this.materi = materi;
-        this.lokasi = lokasi;
-        this.pengajar = pengajar;
-    }
-
     public Gath(Boolean tipe, String nama, String deskripsi, Long reward_xp, Long reward_points, Date date, String materi, String lokasi, Long pengajar) {
         super(tipe, nama, deskripsi, reward_xp, reward_points, date);
         this.materi = materi;
         this.lokasi = lokasi;
         this.pengajar = pengajar;
-    }
-
-    public Long getId_gath() {
-        return id_gath;
-    }
-
-    public void setId_gath(Long id_gath) {
-        this.id_gath = id_gath;
     }
 
     public String getMateri() {

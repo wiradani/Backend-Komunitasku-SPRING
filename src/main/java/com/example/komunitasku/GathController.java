@@ -34,5 +34,20 @@ public class GathController {
         gathRepository.delete(gath);
     }
 
+    @PutMapping("/gath/{id}")
+    public Gath updateGath(@PathVariable(value = "id")Long id,@RequestBody Gath body){
+        Gath gath = gathRepository.findById(id).orElseThrow(() -> new ResourceExceptionNotFound(id.toString()));
+        gath.setNama(body.getNama());
+        gath.setDeskripsi(body.getDeskripsi());
+        gath.setMateri(body.getMateri());
+        gath.setLokasi(body.getLokasi());
+        gath.setDate(body.getDate());
+        gath.setPengajar(body.getPengajar());
+        gath.setReward_points(body.getReward_points());
+        gath.setReward_xp(body.getReward_xp());
+        return gathRepository.save(gath);
+
+    }
+
 
 }
