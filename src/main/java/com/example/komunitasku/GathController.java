@@ -30,13 +30,13 @@ public class GathController {
 
     @DeleteMapping("/gath/{id}")
     public  void delete(@PathVariable(value = "id")Long id){
-        Gath gath = gathRepository.findById(id).orElseThrow(() -> new ResourceExceptionNotFound(id.toString()));
+        Gath gath = gathRepository.findById(id).orElseThrow(()-> new ResourceExceptionNotFound("ID" + id.toString()+ "not found "));
         gathRepository.delete(gath);
     }
 
     @PutMapping("/gath/{id}")
     public Gath updateGath(@PathVariable(value = "id")Long id,@RequestBody Gath body){
-        Gath gath = gathRepository.findById(id).orElseThrow(() -> new ResourceExceptionNotFound(id.toString()));
+        Gath gath = gathRepository.findById(id).orElseThrow(()-> new ResourceExceptionNotFound("ID" + id.toString()+ "not found "));
         gath.setNama(body.getNama());
         gath.setDeskripsi(body.getDeskripsi());
         gath.setMateri(body.getMateri());
