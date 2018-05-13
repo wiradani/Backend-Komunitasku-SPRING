@@ -1,7 +1,14 @@
 # Backend-Komunitasku-SPRING
-backend aplikasi komunitasku menggunakan spring boot
+backend aplikasi komunitasku menggunakan spring boot java
 
-### how to run
-jalankan menggunakan ide intelij
-### Database
-import file sql dan buat database baru dengan nama "backendAPI"
+### Install database 
+1. masuk kedalam http://localhost/phpmyadmin
+2. buat database baru dengan nama "backendAPI"
+3. import file "backendAPI.sql"
+
+### Cara menjalankan
+1. masuk kedalam folder "backendAPI"
+2. buka terminal dan jalankan
+```
+$ ./gradlew bootRun
+```
