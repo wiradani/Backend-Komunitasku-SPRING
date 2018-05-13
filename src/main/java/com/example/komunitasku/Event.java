@@ -1,32 +1,35 @@
 package com.example.komunitasku;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-public class Event {
-    @Id
-    private Long id;
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@EntityListeners(AuditingEntityListener.class)
+public abstract class Event {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private Boolean tipe;
     private String nama;
-    private Date date;
-    private Long reward_point;
-    private Long reward_xp;
     private String deskripsi;
+    private Long reward_xp;
+    private Long reward_points;
+    private Date date;
 
     public Event() {
     }
 
-    public Event(Long id, Boolean tipe, String nama, Date date, Long reward_point, Long reward_xp, String deskripsi) {
-        this.id = id;
+    public Event(Boolean tipe, String nama, String deskripsi, Long reward_xp, Long reward_points, Date date) {
         this.tipe = tipe;
         this.nama = nama;
-        this.date = date;
-        this.reward_point = reward_point;
-        this.reward_xp = reward_xp;
         this.deskripsi = deskripsi;
+        this.reward_xp = reward_xp;
+        this.reward_points = reward_points;
+        this.date = date;
     }
 
     public Long getId() {
@@ -53,20 +56,12 @@ public class Event {
         this.nama = nama;
     }
 
-    public Date getDate() {
-        return date;
+    public String getDeskripsi() {
+        return deskripsi;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public Long getReward_point() {
-        return reward_point;
-    }
-
-    public void setReward_point(Long reward_point) {
-        this.reward_point = reward_point;
+    public void setDeskripsi(String deskripsi) {
+        this.deskripsi = deskripsi;
     }
 
     public Long getReward_xp() {
@@ -77,11 +72,19 @@ public class Event {
         this.reward_xp = reward_xp;
     }
 
-    public String getDeskripsi() {
-        return deskripsi;
+    public Long getReward_points() {
+        return reward_points;
     }
 
-    public void setDeskripsi(String deskripsi) {
-        this.deskripsi = deskripsi;
+    public void setReward_points(Long reward_points) {
+        this.reward_points = reward_points;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

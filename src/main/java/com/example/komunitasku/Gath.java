@@ -1,25 +1,33 @@
 package com.example.komunitasku;
 
-import javax.persistence.Entity;
+import org.hibernate.validator.constraints.br.CPF;
+
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Table(name = "Gath")
 public class Gath extends Event {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_gath")
     private Long id_gath;
     private String materi;
     private String lokasi;
     private Long pengajar;
 
-    public Gath(Long id_gath, String materi, String lokasi, Long pengajar) {
-        this.id_gath = id_gath;
+    public Gath() {
+    }
+
+    public Gath(String materi, String lokasi, Long pengajar) {
         this.materi = materi;
         this.lokasi = lokasi;
         this.pengajar = pengajar;
     }
 
-    public Gath(Long id, Boolean tipe, String nama, Date date, Long reward_point, Long reward_xp, String deskripsi, Long id_gath, String materi, String lokasi, Long pengajar) {
-        super(id, tipe, nama, date, reward_point, reward_xp, deskripsi);
-        this.id_gath = id_gath;
+    public Gath(Boolean tipe, String nama, String deskripsi, Long reward_xp, Long reward_points, Date date, String materi, String lokasi, Long pengajar) {
+        super(tipe, nama, deskripsi, reward_xp, reward_points, date);
         this.materi = materi;
         this.lokasi = lokasi;
         this.pengajar = pengajar;
