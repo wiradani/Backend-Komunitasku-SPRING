@@ -6,18 +6,17 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-@EntityListeners(AuditingEntityListener.class)
-public abstract class User {
+@Inheritance(strategy = InheritanceType.JOINED)
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_user")
-    private  Long id;
-    private  String name;
-    private String username;
-    private  String password;
-    private  String email;
-    private  Boolean role;
+    protected   Long id;
+    protected   String name;
+    protected String username;
+    protected   String password;
+    protected   String email;
+    protected   Boolean role;
 
     public User() {
     }

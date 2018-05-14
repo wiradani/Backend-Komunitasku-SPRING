@@ -4,13 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@RestController
 public class GathController {
     private GathRepository gathRepository;
 
     @Autowired
-    public GathController(GathRepository gathRepository){
-        this.gathRepository=gathRepository;
+    public GathController(GathRepository gathRepository) {
+        this.gathRepository = gathRepository;
     }
 
     @GetMapping("/gath")
@@ -41,7 +41,6 @@ public class GathController {
         gath.setDeskripsi(body.getDeskripsi());
         gath.setMateri(body.getMateri());
         gath.setLokasi(body.getLokasi());
-        gath.setDate(body.getDate());
         gath.setPengajar(body.getPengajar());
         gath.setReward_points(body.getReward_points());
         gath.setReward_xp(body.getReward_xp());

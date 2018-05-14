@@ -1,6 +1,7 @@
 package com.example.komunitasku;
 
 import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import java.util.Date;
 
@@ -15,8 +16,8 @@ public class Challange extends Event {
     public Challange() {
     }
 
-    public Challange(Boolean tipe, String nama, String deskripsi, Long reward_xp, Long reward_points, Date date, Long pembuat, String link_submisi, String waktu_mulai, String waktu_selesail) {
-        super(tipe, nama, deskripsi, reward_xp, reward_points, date);
+    public Challange(String nama, String deskripsi, Integer reward_xp, Integer reward_points, Long pembuat, String link_submisi, String waktu_mulai, String waktu_selesail) {
+        super(nama, deskripsi, reward_xp, reward_points);
         this.pembuat = pembuat;
         this.link_submisi = link_submisi;
         this.waktu_mulai = waktu_mulai;

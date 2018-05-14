@@ -6,30 +6,26 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-@EntityListeners(AuditingEntityListener.class)
-public abstract class Event {
+@Inheritance(strategy = InheritanceType.JOINED)
+public class Event {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private Boolean tipe;
-    private String nama;
-    private String deskripsi;
-    private Long reward_xp;
-    private Long reward_points;
-    private Date date;
+    protected Long id;
+    protected String nama;
+    protected String deskripsi;
+    protected Integer reward_xp;
+    protected Integer reward_points;
+
 
     public Event() {
     }
 
-    public Event(Boolean tipe, String nama, String deskripsi, Long reward_xp, Long reward_points, Date date) {
-        this.tipe = tipe;
+    public Event(String nama, String deskripsi, Integer reward_xp, Integer reward_points) {
         this.nama = nama;
         this.deskripsi = deskripsi;
         this.reward_xp = reward_xp;
         this.reward_points = reward_points;
-        this.date = date;
     }
 
     public Long getId() {
@@ -38,14 +34,6 @@ public abstract class Event {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Boolean getTipe() {
-        return tipe;
-    }
-
-    public void setTipe(Boolean tipe) {
-        this.tipe = tipe;
     }
 
     public String getNama() {
@@ -64,27 +52,19 @@ public abstract class Event {
         this.deskripsi = deskripsi;
     }
 
-    public Long getReward_xp() {
+    public Integer getReward_xp() {
         return reward_xp;
     }
 
-    public void setReward_xp(Long reward_xp) {
+    public void setReward_xp(Integer reward_xp) {
         this.reward_xp = reward_xp;
     }
 
-    public Long getReward_points() {
+    public Integer getReward_points() {
         return reward_points;
     }
 
-    public void setReward_points(Long reward_points) {
+    public void setReward_points(Integer reward_points) {
         this.reward_points = reward_points;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
     }
 }

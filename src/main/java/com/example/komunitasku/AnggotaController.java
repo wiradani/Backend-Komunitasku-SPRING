@@ -8,10 +8,12 @@ import java.util.List;
 @RestController
 public class AnggotaController {
     private AnggotaRepository anggotaRepository;
+    private EventRepository eventRepository;
 
     @Autowired
-    public AnggotaController(AnggotaRepository anggotaRepository){
-        this.anggotaRepository=anggotaRepository;
+    public AnggotaController(AnggotaRepository anggotaRepository, EventRepository eventRepository) {
+        this.anggotaRepository = anggotaRepository;
+        this.eventRepository = eventRepository;
     }
 
     @GetMapping("/Anggota")
@@ -52,24 +54,40 @@ public class AnggotaController {
         if (titleold.getXp()<1000){
             titleold.setTitle("noob");
         }
-        else if (titleold.getXp()<2000){
+        else if (titleold.getXp()<=2000){
             titleold.setTitle("Script Kiddes");
         }
-        else if (titleold.getXp()<3500){
+        else if (titleold.getXp()<=3500){
             titleold.setTitle("Medium");
         }
-        else if (titleold.getXp()<5000){
+        else if (titleold.getXp()<=5000){
             titleold.setTitle("Intermediate");
         }
-        else if (titleold.getXp()<7500){
+        else if (titleold.getXp()<=7500){
             titleold.setTitle("Developer");
         }
-        else if (titleold.getXp()<10000){
+        else if (titleold.getXp()<=10000){
             titleold.setTitle("pro");
         }
-        else if (titleold.getXp()<20000){
+        else if (titleold.getXp()<=20000){
             titleold.setTitle("Mastah");
         }
         return anggotaRepository.save(titleold);
+    }
+
+    @PutMapping("/updatePoints/{id}/{idEv}")
+    public Anggota updatePoints(@PathVariable(value = "id")Long id, @PathVariable(value = "idEv")Long idEv){
+        Anggota pointsold = anggotaRepository.findById(id).orElseThrow(()-> new ResourceExceptionNotFound("ID" + id.toString()+ "not found "));
+        Event rewadspoint = eventRepository.findById(idEv).orElseThrow(()-> new ResourceExceptionNotFound("ID" + idEv.toString()+ "not found "));
+        pointsold.setPoints(pointsold.getPoints() + rewadspoint.getReward_points());
+        return anggotaRepository.save(pointsold);
+    }
+
+    @PutMapping("/updateXP/{id}/{idEv}")
+    public Anggota updateXP(@PathVariable(value = "id")Long id, @PathVariable(value = "idEv")Long idEv){
+        Anggota xpold = anggotaRepository.findById(id).orElseThrow(()-> new ResourceExceptionNotFound("ID" + id.toString()+ "not found "));
+        Event xppoint = eventRepository.findById(idEv).orElseThrow(()-> new ResourceExceptionNotFound("ID" + idEv.toString()+ "not found "));
+        xpold.setXp(xpold.getXp() + xppoint.getReward_xp());
+        return anggotaRepository.save(xpold);
     }
 }

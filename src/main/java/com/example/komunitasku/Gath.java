@@ -16,8 +16,8 @@ public class Gath extends Event {
     public Gath() {
     }
 
-    public Gath(Boolean tipe, String nama, String deskripsi, Long reward_xp, Long reward_points, Date date, String materi, String lokasi, Long pengajar) {
-        super(tipe, nama, deskripsi, reward_xp, reward_points, date);
+    public Gath(String nama, String deskripsi, Integer reward_xp, Integer reward_points, String materi, String lokasi, Long pengajar) {
+        super(nama, deskripsi, reward_xp, reward_points);
         this.materi = materi;
         this.lokasi = lokasi;
         this.pengajar = pengajar;
