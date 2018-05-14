@@ -1,11 +1,14 @@
 package com.example.komunitasku;
 
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "user")
-public class User {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@EntityListeners(AuditingEntityListener.class)
+public abstract class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_user")
@@ -14,23 +17,16 @@ public class User {
     private String username;
     private  String password;
     private  String email;
-    private  String title;
-    private  Long xp;
-    private  Long points;
     private  Boolean role;
 
     public User() {
     }
 
-    public User(Long id, String name, String username, String password, String email, String title, Long xp, Long points, Boolean role) {
-        this.id = id;
+    public User(String name, String username, String password, String email, Boolean role) {
         this.name = name;
         this.username = username;
         this.password = password;
         this.email = email;
-        this.title = title;
-        this.xp = xp;
-        this.points = points;
         this.role = role;
     }
 
@@ -72,30 +68,6 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Long getXp() {
-        return xp;
-    }
-
-    public void setXp(Long xp) {
-        this.xp = xp;
-    }
-
-    public Long getPoints() {
-        return points;
-    }
-
-    public void setPoints(Long points) {
-        this.points = points;
     }
 
     public Boolean getRole() {

@@ -1,0 +1,75 @@
+package com.example.komunitasku;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+public class AnggotaController {
+    private AnggotaRepository anggotaRepository;
+
+    @Autowired
+    public AnggotaController(AnggotaRepository anggotaRepository){
+        this.anggotaRepository=anggotaRepository;
+    }
+
+    @GetMapping("/Anggota")
+    public List<Anggota> index() {
+        return  anggotaRepository.findAll();
+    }
+
+    @GetMapping("/Anggota/{id}")
+    public Anggota show(@PathVariable(value = "id")Long id){
+        return anggotaRepository.findById(id).orElseThrow(() -> new ResourceExceptionNotFound(id.toString()));
+    }
+
+    @PostMapping("/Anggota")
+    public Anggota createAnggota(@RequestBody Anggota anggota){
+        return anggotaRepository.save(anggota);
+    }
+
+
+    @PutMapping("/Anggota/{id}")
+    public Anggota updateAnggota(@PathVariable(value = "id")Long id,@RequestBody Anggota anggotaNew){
+       Anggota anggotaold = anggotaRepository.findById(id).orElseThrow(()-> new ResourceExceptionNotFound("ID" + id.toString()+ "not found "));
+        anggotaold.setUsername(anggotaNew.getUsername());
+        anggotaold.setName(anggotaNew.getName());
+        anggotaold.setEmail(anggotaNew.getEmail());
+        anggotaold.setPassword(anggotaNew.getPassword());
+        return anggotaRepository.save(anggotaold);
+    }
+
+    @DeleteMapping("/Anggota/{id}")
+    public  void delete(@PathVariable(value = "id") Long id){
+        Anggota  anggota = anggotaRepository.findById(id).orElseThrow(()-> new ResourceExceptionNotFound("ID" + id.toString()+ "not found "));
+        anggotaRepository.delete(anggota);
+    }
+
+    @PutMapping("/title/{id}")
+    public Anggota updatetitle(@PathVariable(value = "id")Long id){
+        Anggota titleold=anggotaRepository.findById(id).orElseThrow(()-> new ResourceExceptionNotFound("ID" + id.toString()+ "not found "));
+        if (titleold.getXp()<1000){
+            titleold.setTitle("noob");
+        }
+        else if (titleold.getXp()<2000){
+            titleold.setTitle("Script Kiddes");
+        }
+        else if (titleold.getXp()<3500){
+            titleold.setTitle("Medium");
+        }
+        else if (titleold.getXp()<5000){
+            titleold.setTitle("Intermediate");
+        }
+        else if (titleold.getXp()<7500){
+            titleold.setTitle("Developer");
+        }
+        else if (titleold.getXp()<10000){
+            titleold.setTitle("pro");
+        }
+        else if (titleold.getXp()<20000){
+            titleold.setTitle("Mastah");
+        }
+        return anggotaRepository.save(titleold);
+    }
+}
