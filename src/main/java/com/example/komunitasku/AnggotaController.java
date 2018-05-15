@@ -1,6 +1,8 @@
 package com.example.komunitasku;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,17 +11,27 @@ import java.util.List;
 public class AnggotaController {
     private AnggotaRepository anggotaRepository;
     private EventRepository eventRepository;
+    private KomunitasRepository komunitasRepository;
 
-    @Autowired
-    public AnggotaController(AnggotaRepository anggotaRepository, EventRepository eventRepository) {
+    public AnggotaController(AnggotaRepository anggotaRepository, EventRepository eventRepository, KomunitasRepository komunitasRepository) {
         this.anggotaRepository = anggotaRepository;
         this.eventRepository = eventRepository;
+        this.komunitasRepository = komunitasRepository;
     }
+
+    @Autowired
+
 
     @GetMapping("/Anggota")
     public List<Anggota> index() {
         return  anggotaRepository.findAll();
     }
+
+//    @GetMapping("/Anggota2")
+//    public List<Anggota> index() {
+//        User user = new User();
+//        user.komunitass
+//    }
 
     @GetMapping("/Anggota/{id}")
     public Anggota show(@PathVariable(value = "id")Long id){
@@ -39,8 +51,10 @@ public class AnggotaController {
         anggotaold.setName(anggotaNew.getName());
         anggotaold.setEmail(anggotaNew.getEmail());
         anggotaold.setPassword(anggotaNew.getPassword());
+        anggotaold.setKomunitass(anggotaNew.getKomunitass());
         return anggotaRepository.save(anggotaold);
     }
+
 
     @DeleteMapping("/Anggota/{id}")
     public  void delete(@PathVariable(value = "id") Long id){
@@ -90,4 +104,14 @@ public class AnggotaController {
         xpold.setXp(xpold.getXp() + xppoint.getReward_xp());
         return anggotaRepository.save(xpold);
     }
+
+//    @PutMapping("/JoinKomunitas/{id}/{idKom}")
+//    public Anggota joinKomunitas(@PathVariable(value = "id")Long id,@PathVariable(value = "idKom")Long idKom){
+//        Anggota anggotaold = anggotaRepository.findById(id).orElseThrow(()-> new ResourceExceptionNotFound("ID" + id.toString()+ "not found "));
+//        Komunitas komunitasid = komunitasRepository.findById(idKom).orElseThrow(()-> new ResourceExceptionNotFound("ID" + idKom.toString()+ "not found "));
+//        anggotaold.setKomunitass();
+//        return anggotaRepository.save(anggotaold);
+//    }
+
+
 }

@@ -4,10 +4,23 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class User {
+
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(
+            name = "Daftar_Komunitas",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = { @JoinColumn(name = "komunitas_id")}
+
+    )
+    protected Set<Komunitas> komunitass = new HashSet<>();
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_user")
@@ -16,17 +29,25 @@ public class User {
     protected String username;
     protected   String password;
     protected   String email;
-    protected   Boolean role;
+
 
     public User() {
     }
 
-    public User(String name, String username, String password, String email, Boolean role) {
+    public User(Set<Komunitas> komunitass, String name, String username, String password, String email) {
+        this.komunitass = komunitass;
         this.name = name;
         this.username = username;
         this.password = password;
         this.email = email;
-        this.role = role;
+    }
+
+    public Set<Komunitas> getKomunitass() {
+        return komunitass;
+    }
+
+    public void setKomunitass(Set<Komunitas> komunitass) {
+        this.komunitass = komunitass;
     }
 
     public Long getId() {
@@ -67,13 +88,5 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Boolean getRole() {
-        return role;
-    }
-
-    public void setRole(Boolean role) {
-        this.role = role;
     }
 }

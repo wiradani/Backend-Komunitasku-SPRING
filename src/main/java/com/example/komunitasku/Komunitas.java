@@ -1,10 +1,15 @@
 package com.example.komunitasku;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "komunitas")
 public class Komunitas {
+
+    @ManyToMany(mappedBy = "komunitass")
+    private Set<User> userss = new HashSet<>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

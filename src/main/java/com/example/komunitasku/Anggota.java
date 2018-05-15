@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.criteria.CriteriaBuilder;
+import java.util.Set;
 
 @Entity
 @Table(name = "anggota")
@@ -19,11 +20,10 @@ public class Anggota extends User {
     public Anggota() {
         jumlah_event = xp = points =0;
         title = "noob";
-        role = true;
     }
 
-    public Anggota(String name, String username, String password, String email, Boolean role, Integer jumlah_event, String title, Integer xp, Integer points) {
-        super(name, username, password, email, role);
+    public Anggota(Set<Komunitas> komunitass, String name, String username, String password, String email, Integer jumlah_event, String title, Integer xp, Integer points) {
+        super(komunitass, name, username, password, email);
         this.jumlah_event = jumlah_event;
         this.title = title;
         this.xp = xp;

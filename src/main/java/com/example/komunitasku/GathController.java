@@ -45,7 +45,6 @@ public class GathController {
         gath.setReward_points(body.getReward_points());
         gath.setReward_xp(body.getReward_xp());
         return gathRepository.save(gath);
-
     }
 
 

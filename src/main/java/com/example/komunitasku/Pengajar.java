@@ -2,6 +2,7 @@ package com.example.komunitasku;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.util.Set;
 
 @Entity
 @Table(name = "pengajar")
@@ -11,8 +12,8 @@ public class Pengajar extends User {
     public Pengajar() {
     }
 
-    public Pengajar(String name, String username, String password, String email, Boolean role, Integer jumlah_mengajar) {
-        super(name, username, password, email, role);
+    public Pengajar(Set<Komunitas> komunitass, String name, String username, String password, String email, Integer jumlah_mengajar) {
+        super(komunitass, name, username, password, email);
         this.jumlah_mengajar = jumlah_mengajar;
     }
 
