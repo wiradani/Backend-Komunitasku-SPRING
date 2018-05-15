@@ -4,10 +4,15 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Event {
+
+    @ManyToMany(mappedBy = "eventss")
+    private Set<User> userss = new HashSet<>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,11 +26,20 @@ public class Event {
     public Event() {
     }
 
-    public Event(String nama, String deskripsi, Integer reward_xp, Integer reward_points) {
+    public Event(Set<User> userss, String nama, String deskripsi, Integer reward_xp, Integer reward_points) {
+        this.userss = userss;
         this.nama = nama;
         this.deskripsi = deskripsi;
         this.reward_xp = reward_xp;
         this.reward_points = reward_points;
+    }
+
+    public Set<User> getUserss() {
+        return userss;
+    }
+
+    public void setUserss(Set<User> userss) {
+        this.userss = userss;
     }
 
     public Long getId() {

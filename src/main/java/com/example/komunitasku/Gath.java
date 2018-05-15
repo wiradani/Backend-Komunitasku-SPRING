@@ -4,6 +4,7 @@ import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "Gath")
@@ -16,8 +17,8 @@ public class Gath extends Event {
     public Gath() {
     }
 
-    public Gath(String nama, String deskripsi, Integer reward_xp, Integer reward_points, String materi, String lokasi, Long pengajar) {
-        super(nama, deskripsi, reward_xp, reward_points);
+    public Gath(Set<User> userss, String nama, String deskripsi, Integer reward_xp, Integer reward_points, String materi, String lokasi, Long pengajar) {
+        super(userss, nama, deskripsi, reward_xp, reward_points);
         this.materi = materi;
         this.lokasi = lokasi;
         this.pengajar = pengajar;

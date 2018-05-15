@@ -22,8 +22,7 @@ public class Anggota extends User {
         title = "noob";
     }
 
-    public Anggota(Set<Komunitas> komunitass, String name, String username, String password, String email, Integer jumlah_event, String title, Integer xp, Integer points) {
-        super(komunitass, name, username, password, email);
+    public Anggota(Integer jumlah_event, String title, Integer xp, Integer points) {
         this.jumlah_event = jumlah_event;
         this.title = title;
         this.xp = xp;

@@ -20,6 +20,15 @@ public class User {
     )
     protected Set<Komunitas> komunitass = new HashSet<>();
 
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(
+            name = "Daftar_Event",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = { @JoinColumn(name = "event_id")}
+
+    )
+    protected Set<Event> eventss = new HashSet<>();
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -34,8 +43,9 @@ public class User {
     public User() {
     }
 
-    public User(Set<Komunitas> komunitass, String name, String username, String password, String email) {
+    public User(Set<Komunitas> komunitass, Set<Event> eventss, String name, String username, String password, String email) {
         this.komunitass = komunitass;
+        this.eventss = eventss;
         this.name = name;
         this.username = username;
         this.password = password;
@@ -48,6 +58,14 @@ public class User {
 
     public void setKomunitass(Set<Komunitas> komunitass) {
         this.komunitass = komunitass;
+    }
+
+    public Set<Event> getEventss() {
+        return eventss;
+    }
+
+    public void setEventss(Set<Event> eventss) {
+        this.eventss = eventss;
     }
 
     public Long getId() {

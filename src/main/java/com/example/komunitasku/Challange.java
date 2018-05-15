@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "challange")
@@ -16,8 +17,8 @@ public class Challange extends Event {
     public Challange() {
     }
 
-    public Challange(String nama, String deskripsi, Integer reward_xp, Integer reward_points, Long pembuat, String link_submisi, String waktu_mulai, String waktu_selesail) {
-        super(nama, deskripsi, reward_xp, reward_points);
+    public Challange(Set<User> userss, String nama, String deskripsi, Integer reward_xp, Integer reward_points, Long pembuat, String link_submisi, String waktu_mulai, String waktu_selesail) {
+        super(userss, nama, deskripsi, reward_xp, reward_points);
         this.pembuat = pembuat;
         this.link_submisi = link_submisi;
         this.waktu_mulai = waktu_mulai;
