@@ -32,6 +32,9 @@ public class User {
     @ManyToMany(mappedBy = "rsvpuser")
     private Set<Event> rsvpevent = new HashSet<>();
 
+    @ManyToMany(mappedBy = "daftarreward")
+    private Set<Rewards> daftaruserr = new HashSet<>();
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

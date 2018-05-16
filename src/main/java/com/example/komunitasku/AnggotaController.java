@@ -12,14 +12,15 @@ public class AnggotaController {
     private AnggotaRepository anggotaRepository;
     private EventRepository eventRepository;
     private KomunitasRepository komunitasRepository;
+    private RewardsRepository rewardsRepository;
 
-    public AnggotaController(AnggotaRepository anggotaRepository, EventRepository eventRepository, KomunitasRepository komunitasRepository) {
+    @Autowired
+    public AnggotaController(AnggotaRepository anggotaRepository, EventRepository eventRepository, KomunitasRepository komunitasRepository, RewardsRepository rewardsRepository) {
         this.anggotaRepository = anggotaRepository;
         this.eventRepository = eventRepository;
         this.komunitasRepository = komunitasRepository;
+        this.rewardsRepository = rewardsRepository;
     }
-
-    @Autowired
 
 
     @GetMapping("/Anggota")
@@ -104,6 +105,8 @@ public class AnggotaController {
         xpold.setXp(xpold.getXp() + xppoint.getReward_xp());
         return anggotaRepository.save(xpold);
     }
+
+
 
 //    @PutMapping("/JoinKomunitas/{id}/{idKom}")
 //    public Anggota joinKomunitas(@PathVariable(value = "id")Long id,@PathVariable(value = "idKom")Long idKom){
