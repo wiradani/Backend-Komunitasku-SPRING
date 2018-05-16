@@ -29,6 +29,9 @@ public class User {
     )
     protected Set<Event> eventss = new HashSet<>();
 
+    @ManyToMany(mappedBy = "rsvpuser")
+    private Set<Event> rsvpevent = new HashSet<>();
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

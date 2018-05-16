@@ -14,6 +14,15 @@ public class Event {
     @ManyToMany(mappedBy = "eventss")
     private Set<User> userss = new HashSet<>();
 
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(
+            name = "RSVP_Event",
+            joinColumns = {@JoinColumn(name = "event_id")},
+            inverseJoinColumns = { @JoinColumn(name = "user_id")}
+
+    )
+    protected Set<User> rsvpuser = new HashSet<>();
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     protected Long id;
