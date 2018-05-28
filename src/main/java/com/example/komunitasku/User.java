@@ -45,17 +45,25 @@ public class User {
     protected   String password;
     protected   String email;
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 
     public User() {
     }
 
-    public User(Set<Komunitas> komunitass, Set<Event> eventss, String name, String username, String password, String email) {
+    public User(Set<Komunitas> komunitass, Set<Event> eventss, Set<Event> rsvpevent, Set<Rewards> daftaruserr, String name, String username, String password, String email, Set<Role> roles) {
         this.komunitass = komunitass;
         this.eventss = eventss;
+        this.rsvpevent = rsvpevent;
+        this.daftaruserr = daftaruserr;
         this.name = name;
         this.username = username;
         this.password = password;
         this.email = email;
+        this.roles = roles;
     }
 
     public Set<Komunitas> getKomunitass() {
@@ -72,6 +80,22 @@ public class User {
 
     public void setEventss(Set<Event> eventss) {
         this.eventss = eventss;
+    }
+
+    public Set<Event> getRsvpevent() {
+        return rsvpevent;
+    }
+
+    public void setRsvpevent(Set<Event> rsvpevent) {
+        this.rsvpevent = rsvpevent;
+    }
+
+    public Set<Rewards> getDaftaruserr() {
+        return daftaruserr;
+    }
+
+    public void setDaftaruserr(Set<Rewards> daftaruserr) {
+        this.daftaruserr = daftaruserr;
     }
 
     public Long getId() {
@@ -112,5 +136,13 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }

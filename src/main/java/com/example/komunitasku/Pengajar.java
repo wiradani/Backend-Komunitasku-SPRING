@@ -12,8 +12,8 @@ public class Pengajar extends User {
     public Pengajar() {
     }
 
-    public Pengajar(Set<Komunitas> komunitass, Set<Event> eventss, String name, String username, String password, String email, Integer jumlah_mengajar) {
-        super(komunitass, eventss, name, username, password, email);
+    public Pengajar(Set<Komunitas> komunitass, Set<Event> eventss, Set<Event> rsvpevent, Set<Rewards> daftaruserr, String name, String username, String password, String email, Set<Role> roles, Integer jumlah_mengajar) {
+        super(komunitass, eventss, rsvpevent, daftaruserr, name, username, password, email, roles);
         this.jumlah_mengajar = jumlah_mengajar;
     }
 
