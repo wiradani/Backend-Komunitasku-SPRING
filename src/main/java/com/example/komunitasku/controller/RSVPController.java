@@ -1,5 +1,7 @@
-package com.example.komunitasku;
+package com.example.komunitasku.controller;
 
+import com.example.komunitasku.Repository.RSVPRepository;
+import com.example.komunitasku.model.RSVP;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
