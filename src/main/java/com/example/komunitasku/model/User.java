@@ -38,20 +38,17 @@ public class User {
     @Column(name = "id_user")
     protected   Long id;
     protected   String name;
-    protected String username;
+    protected   String username;
     protected   String password;
     protected   String email;
+    protected  boolean enabled ;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<>();
 
     public User() {
+        enabled = true;
     }
 
-    public User(Set<Komunitas> komunitass, Set<Event> eventss, Set<Event> rsvpevent, Set<Rewards> daftaruserr, String name, String username, String password, String email, Set<Role> roles) {
+    public User(Set<Komunitas> komunitass, Set<Event> eventss, Set<Event> rsvpevent, Set<Rewards> daftaruserr, String name, String username, String password, String email) {
         this.komunitass = komunitass;
         this.eventss = eventss;
         this.rsvpevent = rsvpevent;
@@ -60,7 +57,6 @@ public class User {
         this.username = username;
         this.password = password;
         this.email = email;
-        this.roles = roles;
     }
 
     public Set<Komunitas> getKomunitass() {
@@ -135,11 +131,11 @@ public class User {
         this.email = email;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
+    public boolean isEnabled() {
+        return enabled;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 }

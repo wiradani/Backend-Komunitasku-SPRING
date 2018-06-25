@@ -1,14 +1,13 @@
 package com.example.komunitasku.controller;
 
-import com.example.komunitasku.Repository.AnggotaRepository;
-import com.example.komunitasku.Repository.EventRepository;
-import com.example.komunitasku.Repository.KomunitasRepository;
-import com.example.komunitasku.Repository.RewardsRepository;
+import com.example.komunitasku.Repository.*;
 import com.example.komunitasku.exceptionhandler.ResourceExceptionNotFound;
 import com.example.komunitasku.model.Anggota;
 import com.example.komunitasku.model.Event;
+import com.example.komunitasku.model.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.List;
 
@@ -18,13 +17,15 @@ public class AnggotaController {
     private EventRepository eventRepository;
     private KomunitasRepository komunitasRepository;
     private RewardsRepository rewardsRepository;
+    private RoleRepository roleRepository;
 
     @Autowired
-    public AnggotaController(AnggotaRepository anggotaRepository, EventRepository eventRepository, KomunitasRepository komunitasRepository, RewardsRepository rewardsRepository) {
+    public AnggotaController(AnggotaRepository anggotaRepository, EventRepository eventRepository, KomunitasRepository komunitasRepository, RewardsRepository rewardsRepository,RoleRepository roleRepository) {
         this.anggotaRepository = anggotaRepository;
         this.eventRepository = eventRepository;
         this.komunitasRepository = komunitasRepository;
         this.rewardsRepository = rewardsRepository;
+        this.roleRepository = roleRepository;
     }
 
 
@@ -33,11 +34,6 @@ public class AnggotaController {
         return  anggotaRepository.findAll();
     }
 
-//    @GetMapping("/Anggota2")
-//    public List<Anggota> index() {
-//        User user = new User();
-//        user.komunitass
-//    }
 
     @GetMapping("/Anggota/{id}")
     public Anggota show(@PathVariable(value = "id")Long id){
@@ -46,6 +42,9 @@ public class AnggotaController {
 
     @PostMapping("/Anggota")
     public Anggota createAnggota(@RequestBody Anggota anggota){
+        anggota.setPassword(new BCryptPasswordEncoder().encode(anggota.getPassword()));
+        Role role = new Role(anggota.getUsername(),"ROLE_USER");
+        roleRepository.save(role);
         return anggotaRepository.save(anggota);
     }
 
@@ -64,7 +63,10 @@ public class AnggotaController {
 
     @DeleteMapping("/Anggota/{id}")
     public  void delete(@PathVariable(value = "id") Long id){
+
         Anggota  anggota = anggotaRepository.findById(id).orElseThrow(()-> new ResourceExceptionNotFound("ID" + id.toString()+ "not found "));
+        Role role = roleRepository.findByUsernameContaining(anggota.getUsername());
+        roleRepository.delete(role);
         anggotaRepository.delete(anggota);
     }
 

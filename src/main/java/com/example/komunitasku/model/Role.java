@@ -4,38 +4,34 @@ import org.hibernate.annotations.NaturalId;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "roles")
+@Table(name = "authorities")
 public class Role {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
-    @Enumerated(EnumType.STRING)
-    @NaturalId
-    @Column(length = 60)
-    private RoleName name;
+    @Id
+    public String username;
+    public String authority;
 
     public Role() {
-
     }
 
-    public Role(RoleName name) {
-        this.name = name;
+    public Role(String username, String authority) {
+        this.username = username;
+        this.authority = authority;
     }
 
-    public Long getId() {
-        return id;
+    public String getUsername() {
+        return username;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public RoleName getName() {
-        return name;
+    public String getAuthority() {
+        return authority;
     }
 
-    public void setName(RoleName name) {
-        this.name = name;
+    public void setAuthority(String authority) {
+        this.authority = authority;
     }
 }
