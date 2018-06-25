@@ -4,6 +4,7 @@ import com.example.komunitasku.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -42,9 +43,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     // Authorization : Role -> Access
     protected void configure(HttpSecurity http) throws Exception {
         http.httpBasic()
-                .and().authorizeRequests().antMatchers("/komunitas/**").hasRole("ADMIN")
-                .and()
-                .authorizeRequests().antMatchers("/Anggota").anonymous()
+                .and().authorizeRequests()
+                    .antMatchers(HttpMethod.POST, "/komunitas").hasRole("ADMIN")
+                    .antMatchers(HttpMethod.PUT, "/komunitas").hasRole("ADMIN")
+                    .antMatchers(HttpMethod.GET, "/komunitas/**").hasAnyRole("ADMIN","USER")
+                .and().authorizeRequests()
+                    .antMatchers(HttpMethod.POST, "/Anggota").anonymous()
+                    .antMatchers(HttpMethod.GET, "/Anggota/**").hasRole("ADMIN")
+                    .antMatchers(HttpMethod.PUT, "/Anggota/**").hasAnyRole("ADMIN","USER")
+                    .antMatchers(HttpMethod.DELETE, "/Anggota/**").hasAnyRole("ADMIN","USER")
+                .and().authorizeRequests()
+                    .antMatchers(HttpMethod.POST, "/Pengajar").hasRole("ADMIN")
+                    .antMatchers(HttpMethod.GET, "/Pengajar/**").hasRole("ADMIN")
+                    .antMatchers(HttpMethod.PUT, "/Pengajar/**").hasRole("ADMIN")
+                    .antMatchers(HttpMethod.DELETE, "/Pengajar/**").hasRole("ADMIN")
                 .and().csrf().disable().headers().frameOptions().disable();
     }
 
