@@ -30,7 +30,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-security')
     compile('org.springframework.boot:spring-boot-starter-thymeleaf')
     compile('org.springframework.boot:spring-boot-starter-web')
-    compile('org.springframework.boot:spring-jdbc')
+    compile('org.springframework:spring-jdbc:5.0.7.RELEASE')
     compile('org.apache.commons:commons-dbcp2')
     runtime('org.springframework.boot:spring-boot-devtools')
     runtime('mysql:mysql-connector-java')
