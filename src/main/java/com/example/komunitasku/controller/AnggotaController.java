@@ -55,7 +55,7 @@ public class AnggotaController {
         anggotaold.setUsername(anggotaNew.getUsername());
         anggotaold.setName(anggotaNew.getName());
         anggotaold.setEmail(anggotaNew.getEmail());
-        anggotaold.setPassword(anggotaNew.getPassword());
+        anggotaold.setPassword(new BCryptPasswordEncoder().encode(anggotaNew.getPassword()));
         anggotaold.setKomunitass(anggotaNew.getKomunitass());
         return anggotaRepository.save(anggotaold);
     }

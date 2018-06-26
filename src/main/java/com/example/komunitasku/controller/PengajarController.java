@@ -47,7 +47,7 @@ public class PengajarController {
         Pengajar pengajarold = pengajarRepository.findById(id).orElseThrow(()-> new ResourceExceptionNotFound("ID" + id.toString()+ "not found "));
         pengajarold.setName(pengajarNew.getName());
         pengajarold.setEmail(pengajarNew.getEmail());
-        pengajarold.setPassword(pengajarNew.getPassword());
+        pengajarold.setPassword(new BCryptPasswordEncoder().encode(pengajarNew.getPassword()));
         return pengajarRepository.save(pengajarold);
     }
 
