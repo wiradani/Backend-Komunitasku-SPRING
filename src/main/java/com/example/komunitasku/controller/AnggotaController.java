@@ -6,8 +6,9 @@ import com.example.komunitasku.model.Anggota;
 import com.example.komunitasku.model.Event;
 import com.example.komunitasku.model.Role;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.*;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.List;
 
@@ -42,7 +43,7 @@ public class AnggotaController {
 
     @PostMapping("/Anggota")
     public Anggota createAnggota(@RequestBody Anggota anggota){
-        //anggota.setPassword(new BCryptPasswordEncoder().encode(anggota.getPassword()));
+        anggota.setPassword(new BCryptPasswordEncoder().encode(anggota.getPassword()));
         Role role = new Role(anggota.getUsername(),"ROLE_USER");
         roleRepository.save(role);
         return anggotaRepository.save(anggota);
@@ -55,7 +56,7 @@ public class AnggotaController {
         anggotaold.setUsername(anggotaNew.getUsername());
         anggotaold.setName(anggotaNew.getName());
         anggotaold.setEmail(anggotaNew.getEmail());
-        //anggotaold.setPassword(new BCryptPasswordEncoder().encode(anggotaNew.getPassword()));
+        anggotaold.setPassword(new BCryptPasswordEncoder().encode(anggotaNew.getPassword()));
         anggotaold.setKomunitass(anggotaNew.getKomunitass());
         return anggotaRepository.save(anggotaold);
     }

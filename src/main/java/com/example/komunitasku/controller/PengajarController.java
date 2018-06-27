@@ -6,7 +6,7 @@ import com.example.komunitasku.exceptionhandler.ResourceExceptionNotFound;
 import com.example.komunitasku.model.Pengajar;
 import com.example.komunitasku.model.Role;
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,7 +35,7 @@ public class PengajarController {
 
     @PostMapping("/Pengajar")
     public Pengajar createPengajar(@RequestBody Pengajar pengajar){
-        //pengajar.setPassword(new BCryptPasswordEncoder().encode(pengajar.getPassword()));
+        pengajar.setPassword(new BCryptPasswordEncoder().encode(pengajar.getPassword()));
         Role role = new Role(pengajar.getUsername(),"ROLE_ADMIN");
         roleRepository.save(role);
         return pengajarRepository.save(pengajar);
@@ -47,7 +47,7 @@ public class PengajarController {
         Pengajar pengajarold = pengajarRepository.findById(id).orElseThrow(()-> new ResourceExceptionNotFound("ID" + id.toString()+ "not found "));
         pengajarold.setName(pengajarNew.getName());
         pengajarold.setEmail(pengajarNew.getEmail());
-       // pengajarold.setPassword(new BCryptPasswordEncoder().encode(pengajarNew.getPassword()));
+        pengajarold.setPassword(new BCryptPasswordEncoder().encode(pengajarNew.getPassword()));
         return pengajarRepository.save(pengajarold);
     }
 
