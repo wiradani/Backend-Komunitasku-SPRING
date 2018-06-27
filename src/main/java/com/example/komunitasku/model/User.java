@@ -42,13 +42,14 @@ public class User {
     protected   String password;
     protected   String email;
     protected  boolean enabled ;
+    protected String auth_token;
 
 
     public User() {
         enabled = true;
     }
 
-    public User(Set<Komunitas> komunitass, Set<Event> eventss, Set<Event> rsvpevent, Set<Rewards> daftaruserr, String name, String username, String password, String email) {
+    public User(Set<Komunitas> komunitass, Set<Event> eventss, Set<Event> rsvpevent, Set<Rewards> daftaruserr, String name, String username, String password, String email, boolean enabled, String auth_token) {
         this.komunitass = komunitass;
         this.eventss = eventss;
         this.rsvpevent = rsvpevent;
@@ -57,6 +58,16 @@ public class User {
         this.username = username;
         this.password = password;
         this.email = email;
+        this.enabled = enabled;
+        this.auth_token = auth_token;
+    }
+
+    public String getAuth_token() {
+        return auth_token;
+    }
+
+    public void setAuth_token(String auth_token) {
+        this.auth_token = auth_token;
     }
 
     public Set<Komunitas> getKomunitass() {
