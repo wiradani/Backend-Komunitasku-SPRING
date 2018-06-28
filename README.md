@@ -59,3 +59,8 @@ $ ./gradlew bootRun
 | POST   | http://172.18.12.240:8080/uploadFile                 | Memasukan satu file                                 |
 | POST   | http://172.18.12.240:8080/uploadMultipleFiles        | Memasukan banyak file                               |
 | GET    | http://172.18.12.240:8080/downloadFile/{fileName:.+} | Ambil file sesuai nama file                         |
+| POST   | http://172.18.12.240:8080/gallery                    | Buat galery baru                                    |
+| GET    | http://172.18.12.240:8080/gallery                    | Ambil data seluruh data gallery                     |
+| GET    | http://172.18.12.240:8080/gallery/{id}               | ambil data gallery sesuai id gallery                |
+| PUT    | http://172.18.12.240:8080/gallery/{id}               | update data gallery sesuai id                       |
+| DELETE | http://172.18.12.240:8080/gallery/{id}               | hapus gallery sesuai id                             |
