@@ -30,6 +30,7 @@ public class ChallangeContoller {
 
     @PostMapping("/challange")
     public  Challange createChallange(@RequestBody Challange challange){
+        challange.setLabel("challange");
         return challangeRepository.save(challange);
     }
 

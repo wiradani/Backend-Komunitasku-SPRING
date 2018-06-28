@@ -1,6 +1,7 @@
 package com.example.komunitasku.model;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Set;
 
 @Entity
@@ -14,8 +15,8 @@ public class Gath extends Event {
     public Gath() {
     }
 
-    public Gath(Set<User> userss, String nama, String deskripsi, Integer reward_xp, Integer reward_points, String materi, String lokasi, Long pengajar) {
-        super(userss, nama, deskripsi, reward_xp, reward_points);
+    public Gath(Set<User> userss, Set<User> rsvpuser, String nama, String deskripsi, Integer reward_xp, Integer reward_points, String label, Timestamp time, String materi, String lokasi, Long pengajar) {
+        super(userss, rsvpuser, nama, deskripsi, reward_xp, reward_points, label, time);
         this.materi = materi;
         this.lokasi = lokasi;
         this.pengajar = pengajar;

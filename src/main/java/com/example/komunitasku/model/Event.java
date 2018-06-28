@@ -1,6 +1,7 @@
 package com.example.komunitasku.model;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,17 +28,46 @@ public class Event {
     protected String deskripsi;
     protected Integer reward_xp;
     protected Integer reward_points;
-
+    protected String label;
+   
+    protected Timestamp time;
 
     public Event() {
     }
 
-    public Event(Set<User> userss, String nama, String deskripsi, Integer reward_xp, Integer reward_points) {
+    public Event(Set<User> userss, Set<User> rsvpuser, String nama, String deskripsi, Integer reward_xp, Integer reward_points, String label, Timestamp time) {
         this.userss = userss;
+        this.rsvpuser = rsvpuser;
         this.nama = nama;
         this.deskripsi = deskripsi;
         this.reward_xp = reward_xp;
         this.reward_points = reward_points;
+        this.label = label;
+        this.time = time;
+    }
+
+    public Timestamp getTime() {
+        return time;
+    }
+
+    public void setTime(Timestamp time) {
+        this.time = time;
+    }
+
+    public Set<User> getRsvpuser() {
+        return rsvpuser;
+    }
+
+    public void setRsvpuser(Set<User> rsvpuser) {
+        this.rsvpuser = rsvpuser;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
     }
 
     public Set<User> getUserss() {

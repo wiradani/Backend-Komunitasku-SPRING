@@ -28,6 +28,7 @@ public class GathController {
 
     @PostMapping("/gath")
     public Gath createGath(@RequestBody Gath gath){
+        gath.setLabel("gath");
         return gathRepository.save(gath);
     }
 
