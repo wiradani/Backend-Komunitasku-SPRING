@@ -4,7 +4,7 @@ server:
     port: 8080
 spring:
     datasource:
-        password: ''
+        password: 'adhan4323041'
         url: jdbc:mysql://localhost:3306/backendAPI
         username: root
     jpa:
