@@ -30,12 +30,12 @@ public class Event {
     protected Integer reward_points;
     protected String label;
    
-    protected Timestamp time;
+    protected String time;
 
     public Event() {
     }
 
-    public Event(Set<User> userss, Set<User> rsvpuser, String nama, String deskripsi, Integer reward_xp, Integer reward_points, String label, Timestamp time) {
+    public Event(Set<User> userss, Set<User> rsvpuser, String nama, String deskripsi, Integer reward_xp, Integer reward_points, String label, String time) {
         this.userss = userss;
         this.rsvpuser = rsvpuser;
         this.nama = nama;
@@ -46,12 +46,12 @@ public class Event {
         this.time = time;
     }
 
-    public Timestamp getTime() {
-        return time;
+    public Set<User> getUserss() {
+        return userss;
     }
 
-    public void setTime(Timestamp time) {
-        this.time = time;
+    public void setUserss(Set<User> userss) {
+        this.userss = userss;
     }
 
     public Set<User> getRsvpuser() {
@@ -60,22 +60,6 @@ public class Event {
 
     public void setRsvpuser(Set<User> rsvpuser) {
         this.rsvpuser = rsvpuser;
-    }
-
-    public String getLabel() {
-        return label;
-    }
-
-    public void setLabel(String label) {
-        this.label = label;
-    }
-
-    public Set<User> getUserss() {
-        return userss;
-    }
-
-    public void setUserss(Set<User> userss) {
-        this.userss = userss;
     }
 
     public Long getId() {
@@ -116,5 +100,21 @@ public class Event {
 
     public void setReward_points(Integer reward_points) {
         this.reward_points = reward_points;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 }

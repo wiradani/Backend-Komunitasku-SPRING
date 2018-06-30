@@ -18,7 +18,7 @@ public class Challange extends Event {
     }
 
 
-    public Challange(Set<User> userss, Set<User> rsvpuser, String nama, String deskripsi, Integer reward_xp, Integer reward_points, String label, Timestamp time, Long pembuat, String link_submisi, String waktu_mulai, String waktu_selesail) {
+    public Challange(Set<User> userss, Set<User> rsvpuser, String nama, String deskripsi, Integer reward_xp, Integer reward_points, String label, String time, Long pembuat, String link_submisi, String waktu_mulai, String waktu_selesail) {
         super(userss, rsvpuser, nama, deskripsi, reward_xp, reward_points, label, time);
         this.pembuat = pembuat;
         this.link_submisi = link_submisi;
